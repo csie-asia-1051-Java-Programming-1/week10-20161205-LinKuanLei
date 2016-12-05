@@ -12,13 +12,18 @@ public class ex03_103051089 {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		ArrayList<Person> perList = new ArrayList<Person>();
+		String name ;
+		String sex;
+		float hight;
+		float weight;
+		char chk;
 		boolean sw =true;
 		while(sw){
 			System.out.println("(姓名,性別,身高,體重)");
-			String name = sc.next();
-			String sex = sc.next();
-			float hight = sc.nextFloat();
-			float weight = sc.nextFloat();
+			name = sc.next();
+			sex = sc.next();
+			hight = sc.nextFloat();
+			 weight = sc.nextFloat();
 			while(true){
 				if(hight>0){
 					break;
@@ -36,22 +41,28 @@ public class ex03_103051089 {
 				}
 			}
 			perList.add(new Person(name,sex,hight,weight));
+			showPerson(perList);
+
 			System.out.println("more?");
-			char chk =sc.next().charAt(0) ;
-			if(chk=='N'||chk=='n'){
+			chk =sc.next().charAt(0) ;
+			if(chk=='N' || chk== 'n' ){
 				sw=false;
 			}
 		}
-		showPerson(perList);
 	}
-		
-		private static void showPerson(ArrayList list){
-			for(int i =0;i<list.size();i++){
-				System.out.println(list.get(i));
+
+	private static void showPerson(ArrayList list1){
+			for(int i =0;i<list1.size();i++){
+					Person tmp = (Person)	list1.get(i);
+					tmp.ShowInfo();
+
+//				System.out.println(list.get(i).ShowInfo());
 			}
 		}
 	
 }
+
+
 class Person{
 	private String name, sex;
 	private float hight , weight;
@@ -61,10 +72,12 @@ class Person{
 		hight = hight1;
 		weight = weight1;
 	}
+	
 	public double getBMI(){
-		return weight/Math.pow(hight*0.1, 2);
+		return weight/Math.pow(hight/100, 2);
 	}
+	
 	public void ShowInfo(){
-		System.out.println(name+"\t"+sex+"\t"+hight+"\t"+weight+"\t"+getBMI());
+		System.out.println(name+"\t"+sex+"\t"+hight+"\t"+weight+"\t\t"+getBMI());
 	}
 }
